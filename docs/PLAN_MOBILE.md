@@ -33,10 +33,11 @@ Não realizar nenhuma das ações abaixo neste plano:
 
 ## Etapa 1 — Preparar o ambiente de desenvolvimento
 
-1. Instalar Android Studio com Android SDK Platform 36, Build Tools 36.x e JDK compatível com o Android Gradle Plugin.
-2. Criar um Android Virtual Device (AVD) ou preparar um aparelho físico com depuração USB.
-3. Garantir Git instalado e acesso ao repositório.
-4. Abrir o Android Studio e verificar que o SDK e um destino Android estão disponíveis.
+1. Instalar Android Studio com Android SDK Platform 36, Build Tools 36.x e um **JDK completo** compatível com o Android Gradle Plugin; uma instalação que contenha somente o runtime Java não é suficiente, pois o build exige `javac`.
+2. Instalar Android Emulator, Platform Tools/ADB e uma imagem de sistema Android 36.
+3. Criar um Android Virtual Device (AVD) ou preparar um aparelho físico com depuração USB.
+4. Garantir Git instalado e acesso ao repositório.
+5. Abrir o Android Studio e verificar que o SDK e um destino Android estão disponíveis; executar `adb devices` para confirmar que o AVD/aparelho foi reconhecido antes de testes instrumentados.
 
 **Pronto quando:** Android Studio consegue criar ou abrir projetos Android e há um emulador ou aparelho para execução.
 
@@ -47,6 +48,7 @@ Não realizar nenhuma das ações abaixo neste plano:
 3. Habilitar Jetpack Compose e Material 3.
 4. Manter uma `MainActivity` e uma tela inicial estática com o nome do projeto.
 5. Gerar e versionar o Gradle Wrapper (`gradlew`, `gradlew.bat` e `gradle/wrapper/`), arquivos Gradle Kotlin DSL, catálogo de versões e `.gitignore` Android.
+6. Garantir que `gradlew` esteja marcado como executável no Git (`100755`) para funcionar depois de um clone em Linux e macOS.
 6. Executar o projeto em emulador ou aparelho.
 
 **Pronto quando:** um clone limpo compila e abre uma tela inicial, sem permissões, rede, persistência ou integração externa.
@@ -64,7 +66,7 @@ Não realizar nenhuma das ações abaixo neste plano:
 
 ## Etapa 4 — Criar shell de navegação e placeholders
 
-1. Configurar Navigation Compose apenas para rotas internas vazias.
+1. Adicionar Navigation Compose como dependência de infraestrutura e configurar rotas internas vazias.
 2. Criar os destinos `Início`, `Mapa`, `Contatos`, `Perfil` e `Sobre` como telas placeholder estáticas.
 3. Exibir em cada tela um texto explícito informando que a funcionalidade será implementada em um épico posterior.
 4. Usar uma barra de navegação básica e textos em português.
@@ -86,8 +88,8 @@ Não realizar nenhuma das ações abaixo neste plano:
 1. Manter o teste unitário inicial e criar um teste Compose para a tela inicial.
 2. Configurar `ktlint` e/ou `detekt`; registrar a escolha no README.
 3. Criar um hook pre-commit com as verificações locais viáveis.
-4. Rodar `./gradlew assembleDebug`, `./gradlew testDebugUnitTest` e `./gradlew lintDebug`.
-5. Rodar testes instrumentados quando houver emulador ou aparelho disponível.
+4. Rodar `./gradlew assembleDebug`, `./gradlew testDebugUnitTest`, `./gradlew lintDebug` e `./gradlew ktlintCheck`.
+5. Com um AVD/aparelho reconhecido por `adb devices`, rodar `./gradlew connectedDebugAndroidTest`.
 
 **Pronto quando:** o build, a análise e os testes básicos puderem ser repetidos por qualquer pessoa que clonou o repositório.
 
@@ -112,10 +114,11 @@ Não realizar nenhuma das ações abaixo neste plano:
 ## Etapa 8 — Revisar o clone limpo
 
 1. Conferir que `README.md`, `docs/PLAN_MOBILE.md`, Gradle Wrapper, catálogo de versões, `.gitignore`, configuração de lint e testes estão versionados.
-2. Clonar ou testar em uma cópia limpa, sincronizar o Gradle, compilar e executar o app.
-3. Abrir todos os placeholders e confirmar a ausência de funcionalidades do produto.
-4. Conferir `git status` para verificar que arquivos locais e segredos não serão enviados.
-5. Trabalhar em uma branch por ticket e abrir Pull Request antes de integrar na `main`.
+2. Clonar ou testar em uma cópia limpa; criar somente o `local.properties` local com o caminho do SDK, sincronizar o Gradle e executar build, testes unitários, lint e ktlint.
+3. Verificar no clone que `./gradlew` executa sem instalação global de Gradle e gera o APK debug.
+4. Abrir todos os placeholders e confirmar a ausência de funcionalidades do produto.
+5. Conferir `git status` para verificar que arquivos locais e segredos não serão enviados.
+6. Trabalhar em uma branch por ticket e abrir Pull Request antes de integrar na `main`.
 
 **Pronto quando:** o repositório fornece uma base Android reprodutível e segura, pronta para receber implementações futuras.
 
