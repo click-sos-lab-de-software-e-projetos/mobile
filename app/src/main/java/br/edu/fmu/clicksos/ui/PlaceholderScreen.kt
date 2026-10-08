@@ -13,19 +13,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun PlaceholderScreen(title: String, contentPadding: PaddingValues) {
+fun placeholderScreen(title: String, contentPadding: PaddingValues) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(contentPadding)
             .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Center
     ) {
         Text(text = title)
         Text(
-            text = "Esta funcionalidade será implementada em um épico posterior.",
-            textAlign = TextAlign.Center,
+            text = PLACEHOLDER_MESSAGE,
+            textAlign = TextAlign.Center
         )
     }
 }

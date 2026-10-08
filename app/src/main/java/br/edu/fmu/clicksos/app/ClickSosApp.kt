@@ -3,16 +3,16 @@ package br.edu.fmu.clicksos.app
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
-import br.edu.fmu.clicksos.navigation.ClickSosNavigation
-import br.edu.fmu.clicksos.ui.theme.ClickSosTheme
+import br.edu.fmu.clicksos.navigation.clickSosNavigation
+import br.edu.fmu.clicksos.ui.theme.clickSosTheme
 
 @Composable
-fun ClickSosApp() {
+fun clickSosApp() {
     val navController = rememberNavController()
 
-    ClickSosTheme {
+    clickSosTheme {
         MaterialTheme {
-            ClickSosNavigation(navController = navController)
+            clickSosNavigation(navController = navController)
         }
     }
 }

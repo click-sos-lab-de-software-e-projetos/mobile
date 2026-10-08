@@ -12,18 +12,18 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import br.edu.fmu.clicksos.ui.PlaceholderScreen
+import br.edu.fmu.clicksos.ui.placeholderScreen
 
 private enum class Destination(val route: String, val label: String) {
     Home("inicio", "Início"),
     Map("mapa", "Mapa"),
     Contacts("contatos", "Contatos"),
     Profile("perfil", "Perfil"),
-    About("sobre", "Sobre"),
+    About("sobre", "Sobre")
 }
 
 @Composable
-fun ClickSosNavigation(navController: NavHostController = rememberNavController()) {
+fun clickSosNavigation(navController: NavHostController = rememberNavController()) {
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
     Scaffold(
@@ -39,20 +39,20 @@ fun ClickSosNavigation(navController: NavHostController = rememberNavController(
                             }
                         },
                         icon = {},
-                        label = { Text(destination.label) },
+                        label = { Text(destination.label) }
                     )
                 }
             }
-        },
+        }
     ) { paddingValues ->
         NavHost(
             navController = navController,
             startDestination = Destination.Home.route,
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize()
         ) {
             Destination.entries.forEach { destination ->
                 composable(destination.route) {
-                    PlaceholderScreen(title = destination.label, contentPadding = paddingValues)
+                    placeholderScreen(title = destination.label, contentPadding = paddingValues)
                 }
             }
         }
