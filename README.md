@@ -4,6 +4,8 @@ Aplicativo Android nativo do Click S.O.S, desenvolvido em Kotlin e Jetpack Compo
 
 Este repositório começa com um scaffold: ele compila, possui navegação placeholder e estabelece convenções de qualidade. Mapa, autenticação, contatos, localização, integração backend e S.O.S real serão implementados em épicos posteriores.
 
+O projeto usa `applicationId` `br.edu.fmu.clicksos`, `minSdk` 26 e `compileSdk`/`targetSdk` 36.
+
 ## Requisitos
 
 - Android Studio com JDK 17 ou superior compatível.
@@ -35,6 +37,12 @@ No Windows, substitua `./gradlew` por `gradlew.bat`.
 ```
 
 `connectedDebugAndroidTest` exige emulador ou aparelho conectado. O hook de pre-commit usa as verificações que não dependem de dispositivo.
+
+Ative o hook uma vez após o clone:
+
+```bash
+git config core.hooksPath .githooks
+```
 
 ## Configuração local
 
